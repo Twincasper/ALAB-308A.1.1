@@ -63,17 +63,30 @@ console.log(trampoline(flatten, matrix));
 
 let primeElement = document.createElement("p");
 
-const isPrime = (num) => {
-  if (num <= 1) return false;
-  for (let i = 2; i <= Math.sqrt(num); i++) {
-    if (num % i === 0) return false;
-  }
-  primeElement.textContent += `${num}`;
+/*
+  PEDAC
+  P: Create a function called isPrime that takes an integer as a parameter, and adds all prime numbers between 1 and that number to a paragraph element.
+  E: isPrime(10) should add the prime numbers 2, 3, 5, and 7 to the paragraph element.
+  D: Input is an integer, output is a paragraph element with prime numbers.
+  A: Check if num is less than or equal to 1, if true, return false.
+  Check if divisor is greater than the square root of num, since that means we are doing looking for prime numbers,
+  Add num to the paragraph and alert the user all numbers having been found.
+  If num is divisible by divisor, return false.
+  If num is not divisible by divisor, return the result of calling isPrime on num and divisor + 1 so we keep looking for prime numbers.
+*/
 
-  setTimeout(() => {
-    alert("All prime numbers between 1 and 10,000 have been calculated and added to the paragraph.");
-  }, 0);
-}
+const isPrime = (num, divisor = 2) => {
+  if (num <= 1) return false;
+  if (divisor > Math.sqrt(num)) {
+    primeElement.textContent += `${num} `;
+    setTimeout(() => {
+      alert("All prime numbers between 1 and the provided parameter have been calculated and added to the paragraph.");
+    }, 0);
+    return true;
+  }
+  if (num % divisor === 0) return false;
+  return isPrime(num, divisor + 1);
+};
 
 isPrime(10000);
 console.log(primeElement);
