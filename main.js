@@ -118,10 +118,12 @@ let matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
 console.log(flatten(matrix));
 
-const trampoline = (f, ...args) => {
-  let result = f(...args);
+const trampoline = (func, ...args) => {
+  let result = func(...args);
   while (typeof result === "function") {
     result = result();
   }
   return result;
 }
+
+console.log(trampoline(flatten, matrix));
