@@ -17,8 +17,10 @@ try {
   console.log("Counter value:", counter);
 }
 
-// PEDAC
 /*
+Part 2
+
+PEDAC
 P: Define a recursive function called flatten that takes an array as an argument.
 E: flatten([1, [2,7,8,9], [3, [4]]]]) should return [1, 2, 7, 8, 9 , 3, 4].
 D: Input is an array, potentially nested on the initial call, output is a flattened 1D array.
@@ -56,3 +58,24 @@ const trampoline = (func, ...args) => {
 }
 
 console.log(trampoline(flatten, matrix));
+
+// Part 3
+
+let primeElement = document.createElement("p");
+
+const isPrime = (num) => {
+  if (num <= 1) return false;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+  primeElement.textContent += `${num}`;
+
+  setTimeout(() => {
+    alert("All prime numbers between 1 and 10,000 have been calculated and added to the paragraph.");
+  }, 0);
+}
+
+isPrime(10000);
+console.log(primeElement);
+
+
