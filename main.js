@@ -62,6 +62,8 @@ console.log(trampoline(flatten, matrix));
 // Part 3
 
 let primeElement = document.createElement("p");
+primeElement.textContent = "Prime numbers: ";
+document.body.appendChild(primeElement);
 
 /*
   PEDAC
@@ -72,23 +74,36 @@ let primeElement = document.createElement("p");
   Check if divisor is greater than the square root of num, since that means we are doing looking for prime numbers,
   Add num to the paragraph and alert the user all numbers having been found.
   If num is divisible by divisor, return false.
-  If num is not divisible by divisor, return the result of calling isPrime on num and divisor + 1 so we keep looking for prime numbers.
+  If num is not divisible by divisor, return the result of calling isPrime on num and divisor + 1.
 */
 
-const isPrime = (num, divisor = 2) => {
-  if (num <= 1) return false;
-  if (divisor > Math.sqrt(num)) {
-    primeElement.textContent += `${num} `;
-    setTimeout(() => {
-      alert("All prime numbers between 1 and the provided parameter have been calculated and added to the paragraph.");
-    }, 0);
-    return true;
-  }
-  if (num % divisor === 0) return false;
-  return isPrime(num, divisor + 1);
-};
 
-isPrime(10000);
-console.log(primeElement);
+// const isPrime = (num) => {
+  //   if (num <= 1) return false;
+  //   for (let i = 2; i <= Math.sqrt(num); i++) {
+    //     if (num % i === 0) return false;
+    //   }
+    //   setTimeout(() => {
+      //     alert("All prime numbers between 1 and 10,000 have been calculated and added to the paragraph.");
+      //   }, 0);
+      //   return true;
+      // }
+      
+      const isPrime = (num, divisor = 2) => {
+        if (num <= 1) return false;
+        if (num % divisor === 0) return false;
+        
+        if (divisor > Math.sqrt(num)) return true;
+        return isPrime(num, divisor + 1);
+      };
+      
+for (let i = 2; i <= 10000; i++) {
+  if (isPrime(i)) primeElement.textContent += `${i} `;
+}
+
+setTimeout(() => {
+  alert("All prime numbers between 1 and the provided parameter have been calculated and added to the paragraph.");
+}, 0);
+
 
 
